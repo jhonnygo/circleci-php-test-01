@@ -25,6 +25,15 @@ commands:
         default: "Juan"
     steps:
       - run: php lib/greet.php << parameters.nombre >> > greetings.txt
+      - run: |
+          ls -l
+          if [ -f greetings.txt ]; then
+            echo "El archivo greetings.txt se ha creado correctamente."
+            cat greetings.txt  # Esto imprimirá el contenido del archivo
+          else
+            echo "¡El archivo greetings.txt no se ha creado!"
+            exit 1
+          fi
 
 jobs:
 
@@ -40,16 +49,7 @@ jobs:
     steps:
       - checkout
       - generar-saludo:
-          nombre: "Juan"
-      - run: ls -l
-      - run: |
-          if [ -f greetings.txt ]; then
-            echo "El archivo greetings.txt se ha creado correctamente."
-            cat greetings.txt  # Esto imprimirá el contenido del archivo
-          else
-            echo "¡El archivo greetings.txt no se ha creado!"
-            exit 1
-          fi
+          nombre: "Pedro"
       
 
 workflows:
