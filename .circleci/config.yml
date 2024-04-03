@@ -18,6 +18,14 @@ commands:
     steps:
       - run: echo << parameters.message >>
 
+  generar-saludo:
+    parameters:
+      nombre:
+        type: string
+        default: "Juan"
+    steps:
+      - run: php lib/greet.php << parameters.nombre >> > greetings.txt
+
 jobs:
 
   hello-job:
@@ -26,6 +34,13 @@ jobs:
       - checkout
       - mi-hola
       - sonarcloud/scan
+
+  greet-job:
+    <<: *defaults
+    steps:
+      - checkout
+      - generar-saludo:
+          nombre: "Juan"
       
 
 workflows:
@@ -33,3 +48,4 @@ workflows:
     jobs:
       - hello-job:
           context: SonarCloud
+      - greet-job
