@@ -13,7 +13,7 @@ commands:
     parameters:
       message:
         type: string
-        default: "hello world"
+        default: "Hola mundo"
     steps:
       - run: echo << parameters.message >>
 
@@ -30,13 +30,3 @@ workflows:
   my-workflow:
     jobs:
       - hello-job
-
-
-    # steps:
-    #   - checkout
-
-    #   # Install PHP dependencies if needed
-    #   # - run: composer install
-
-    #   # Run Hello World PHP script
-    #   - run: php -r 'echo "Hola Mundo\n";'
