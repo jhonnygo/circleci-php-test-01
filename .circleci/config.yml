@@ -27,6 +27,8 @@ commands:
         default: "Juan"
     steps:
       - run: php lib/greet.php << parameters.nombre >> > greetings.txt
+      - agregar-edad:
+          edad: 30
       - run: |
           ls -l
           if [ -f greetings.txt ]; then
@@ -45,6 +47,7 @@ commands:
     steps:
       - run: |
           sed -i "s/! Bienvenido./ de << parameters.edad >> años! Bienvenido./" greetings.txt
+      - run: cat greetings.txt
 
 ########## JOBS
 jobs:
@@ -62,7 +65,6 @@ jobs:
       - checkout
       - generar-saludo:
           nombre: "Pedro"
-      - run: cat greetings.txt
       
 
 ########## WORKFLOWS
