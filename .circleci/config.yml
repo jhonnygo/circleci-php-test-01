@@ -1,18 +1,16 @@
 version: 2.1
 
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: cimg/php:8.3.4
+
 orbs:
   sonarcloud: sonarsource/sonarcloud@2.0.0
-
-executors:
-
-  php:
-    docker:
-      - image: cimg/php:8.3.4
-
+  
 commands:
 
-  # A command named `echo` that runs the `echo` command
-  echo:
+  mi-hola:
     parameters:
       message:
         type: string
@@ -23,10 +21,10 @@ commands:
 jobs:
 
   hello-job:
-    executor: php # use the `node` executor defined above
+    <<: *defaults
     steps:
-      - checkout # check out the code in the project directory
-      - echo # run the `echo` command
+      - checkout
+      - mi-hola
       - sonarcloud/scan
       
 
