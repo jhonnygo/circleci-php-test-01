@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  sonarcloud: sonarsource/sonarcloud@2.0.0
+
 executors:
 
   php:
@@ -24,9 +27,11 @@ jobs:
     steps:
       - checkout # check out the code in the project directory
       - echo # run the `echo` command
+      - sonarcloud/scan
       
 
 workflows:
-  my-workflow:
+  mi-php-workflow-01:
     jobs:
-      - hello-job
+      - hello-job:
+          context: SonarCloud
