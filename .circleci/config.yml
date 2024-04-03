@@ -65,6 +65,7 @@ jobs:
       - checkout
       - generar-saludo:
           nombre: "Pedro"
+      - sonarcloud/scan
       
 
 ########## WORKFLOWS
