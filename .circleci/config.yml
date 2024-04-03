@@ -5,9 +5,11 @@ defaults: &defaults
   docker:
     - image: cimg/php:8.3.4
 
+########## ORBS
 orbs:
   sonarcloud: sonarsource/sonarcloud@2.0.0
-  
+
+########## COMANDOS 
 commands:
 
   mi-hola:
@@ -35,6 +37,16 @@ commands:
             exit 1
           fi
 
+  agregar-edad:
+    parameters:
+      edad:
+        type: integer
+        default: 18
+    steps:
+      - run: |
+          sed -i "s/! Bienvenido./ de << parameters.edad >> años! Bienvenido./" greetings.txt
+
+########## JOBS
 jobs:
 
   hello-job:
@@ -50,8 +62,10 @@ jobs:
       - checkout
       - generar-saludo:
           nombre: "Pedro"
+      - run: cat greetings.txt
       
 
+########## WORKFLOWS
 workflows:
   mi-php-workflow-01:
     jobs:
