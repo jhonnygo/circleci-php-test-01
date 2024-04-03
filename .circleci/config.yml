@@ -1,0 +1,42 @@
+version: 2.1
+
+executors:
+
+  php:
+    docker:
+      - image: cimg/php:8.3.4
+
+commands:
+
+  # A command named `echo` that runs the `echo` command
+  echo:
+    parameters:
+      message:
+        type: string
+        default: "hello world"
+    steps:
+      - run: echo << parameters.message >>
+
+jobs:
+
+  hello-job:
+    executor: php # use the `node` executor defined above
+    steps:
+      - checkout # check out the code in the project directory
+      - echo # run the `echo` command
+      
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+
+
+    # steps:
+    #   - checkout
+
+    #   # Install PHP dependencies if needed
+    #   # - run: composer install
+
+    #   # Run Hello World PHP script
+    #   - run: php -r 'echo "Hola Mundo\n";'
