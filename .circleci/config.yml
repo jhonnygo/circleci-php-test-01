@@ -74,4 +74,6 @@ workflows:
     jobs:
       - hello-job:
           context: SonarCloud
-      - greet-job
+      - greet-job:
+          context: SonarCloud
+          
